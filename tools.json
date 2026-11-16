@@ -1,0 +1,82 @@
+[
+  {
+    "name": "fqhc_cost_report_search",
+    "description": "Find federally qualified health centers (FQHCs) in Medicare cost report data and compare their cost per visit. Filter by center name words, state, city and fiscal year; returns each match's visits, total allowable cost, cost per visit, Medicare visits and Medicaid visit share, sorted by name (or by cost per visit with sort=\"cost_per_visit_desc\"/\"cost_per_visit_asc\"). From the Centers for Medicare & Medicaid Services Healthcare Cost Report Information System, FQHC cost reports (form CMS-224-14), fiscal years 2015 onward. If nothing matches, the answer lists near-name centers or the valid states and years. Every answer carries the data date. Keyless.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Words in the center name, e.g. \"Family Health\" or \"Community Health Centers of\". All words must match."
+        },
+        "state": {
+          "type": "string",
+          "description": "Two-letter state or territory code, e.g. \"FL\"."
+        },
+        "city": {
+          "type": "string",
+          "description": "City as filed, e.g. \"Miami\". Matches ignoring case."
+        },
+        "fiscal_year": {
+          "type": "string",
+          "description": "Year the cost reporting period ends, e.g. \"2022\". Omit for every year."
+        },
+        "sort": {
+          "type": "string",
+          "enum": [
+            "name",
+            "cost_per_visit_desc",
+            "cost_per_visit_asc",
+            "visits_desc"
+          ],
+          "description": "Order of results (default name)."
+        },
+        "limit": {
+          "type": "number",
+          "description": "Rows to return, default 25, max 200."
+        }
+      }
+    }
+  },
+  {
+    "name": "fqhc_cost_report_center",
+    "description": "Get one federally qualified health center's Medicare cost report figures across every fiscal year: visits (medical, mental health, IOP), total allowable cost, cost per visit, Medicare visits and cost, and visits by payer (Medicare, Medicaid, other) with percent shares. Look up by the Medicare provider number (CCN, a 6-character string such as \"361004\") or by name words plus a state. Includes the change in cost per visit year over year. From the Centers for Medicare & Medicaid Services Healthcare Cost Report Information System, FQHC cost reports (form CMS-224-14). If the center is not found, near-name centers are listed. Keyless.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "provider_number": {
+          "type": "string",
+          "description": "Medicare provider number (CCN) as a 6-character string, e.g. \"361128\". Keep leading zeros."
+        },
+        "name": {
+          "type": "string",
+          "description": "Words in the center name (use with state). Used when provider_number is not given."
+        },
+        "state": {
+          "type": "string",
+          "description": "Two-letter state code to narrow a name lookup, e.g. \"OH\"."
+        }
+      }
+    }
+  },
+  {
+    "name": "fqhc_cost_report_state_summary",
+    "description": "Summarize FQHC Medicare cost report figures for a state and fiscal year: number of reporting centers, total visits, total allowable cost, aggregate and median cost per visit, the lowest- and highest-cost centers, and Medicare and Medicaid shares of reported visits. Omit fiscal_year to get one line per year. From the Centers for Medicare & Medicaid Services Healthcare Cost Report Information System, FQHC cost reports (form CMS-224-14). An unknown state returns the valid state codes and years. Keyless.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "Two-letter state or territory code, e.g. \"FL\"."
+        },
+        "fiscal_year": {
+          "type": "string",
+          "description": "Year the cost reporting period ends, e.g. \"2022\". Omit for a per-year series."
+        }
+      },
+      "required": [
+        "state"
+      ]
+    }
+  }
+]

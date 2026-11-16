@@ -1,0 +1,33 @@
+{
+  "name": "@pipeworx/mcp-fqhc-cost-reports",
+  "version": "0.1.0",
+  "description": "Federally qualified health center (FQHC) Medicare cost report figures, per center and fiscal year (Centers for Medicare & Medicaid Services, Healthcare Cost Report Information System, form CMS-224-14). US federal data, public domain.",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./tools.json": "./tools.json",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "mcp-fqhc-cost-reports": "bin/cli.js"
+  },
+  "files": ["bin/", "lib/", "tools.json", "server.json"],
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": ["mcp", "mcp-server", "model-context-protocol", "pipeworx", "fqhc-cost-reports"],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pipeworx-io/mcp-fqhc-cost-reports.git"
+  },
+  "mcpName": "io.github.pipeworx-io/fqhc-cost-reports",
+  "pipeworx": {
+    "mode": "gateway",
+    "slug": "fqhc-cost-reports",
+    "gatewaySlug": "fqhc-cost-reports",
+    "sourceHash": "v1-1bb843d29d4f6d3e9c4c897b1e2ec78c7afe58e9fcccb72c74616b0300c9ce43",
+    "sourceCommit": "874331b0c46b151f9264bd14840631427a7721c1"
+  }
+}
